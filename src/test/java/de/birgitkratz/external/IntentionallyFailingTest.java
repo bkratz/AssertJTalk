@@ -16,7 +16,7 @@ public class IntentionallyFailingTest {
     public void junit4_intentionallyFail_Name() {
         final var personExternalModel = new PersonInternalModelToPersonExternalModelMapper().mapPerson().apply(personInternalModel);
 
-        assertEquals("Fred", personExternalModel.getName());
+        assertEquals("Check person name", "Fred", personExternalModel.getName());
     }
 
     @Test
@@ -25,7 +25,6 @@ public class IntentionallyFailingTest {
 
         assertThat(personExternalModel.getName())
                 .as("Check person name")
-                .withFailMessage("Wrong person name")
                 .isEqualTo("Fred");
     }
 

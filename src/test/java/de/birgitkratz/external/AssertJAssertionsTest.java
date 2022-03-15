@@ -18,28 +18,28 @@ class AssertJAssertionsTest {
         final var personExternalModel = new PersonInternalModelToPersonExternalModelMapper().mapPerson().apply(personInternalModel);
 
         // checking simple fields
-        assertThat(personExternalModel).isNotNull()
+        assertThat(personExternalModel)
+                .isNotNull()
+                .hasNoNullFieldsOrProperties()
                 .hasFieldOrPropertyWithValue("name", "Birgit")
                 .returns("09-02-1968", from(PersonExternalModel::getDateOfBirth));
 
         // checking iterables
         // not bound to any order
-        assertThat(personExternalModel)
-                .extracting(PersonExternalModel::getCommunications, InstanceOfAssertFactories.list(Communication.class))
+        assertThat(personExternalModel.getCommunications())
                 .hasSize(5)
                 .extracting("communicationMeans", "value")
                 .containsExactlyInAnyOrder(
                         tuple(CommunicationMeans.EMAIL, "mail@birgitkratz.de"),
-                        tuple(CommunicationMeans.EMAIL, "business@birgitkratz.de"),
                         tuple(CommunicationMeans.TELEFON, "my other number"),
+                        tuple(CommunicationMeans.EMAIL, "business@birgitkratz.de"),
                         tuple(CommunicationMeans.TELEFON, "my primary number"),
                         tuple(CommunicationMeans.MOBILE, "my mobile number"));
 
         // checking iterables
         // alternative with 'asInstanceOf' and 'map' (synonymous for 'extracting')
         assertThat(personExternalModel)
-                .extracting("communications")
-                .asInstanceOf(InstanceOfAssertFactories.list(Communication.class))
+                .extracting(PersonExternalModel::getCommunications, InstanceOfAssertFactories.list(Communication.class))
                 .hasSize(5)
                 .map(Communication::communicationMeans, Communication::value)
                 .contains(tuple(CommunicationMeans.EMAIL, "mail@birgitkratz.de"));

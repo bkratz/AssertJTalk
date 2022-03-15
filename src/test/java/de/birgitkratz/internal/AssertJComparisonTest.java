@@ -19,7 +19,9 @@ class AssertJComparisonTest {
 
         final var personInternalModel = new PersonExternalModelToPersonInternalModelMapper().personMapper().apply(personExternalModel);
 
-        assertThat(personInternalModel).usingRecursiveComparison().isEqualTo(expectedPersonInternalModel);
+        assertThat(personInternalModel)
+                .usingRecursiveComparison()
+                .isEqualTo(expectedPersonInternalModel);
     }
 
     @Test
@@ -29,7 +31,10 @@ class AssertJComparisonTest {
 
         final var personInternalModel = new PersonExternalModelToPersonInternalModelMapper().personMapper().apply(personExternalModel);
 
-        assertThat(personInternalModel).usingRecursiveComparison().ignoringFields("name").isEqualTo(expectedPersonInternalModel);
+        assertThat(personInternalModel)
+                .usingRecursiveComparison()
+                .ignoringFields("name")
+                .isEqualTo(expectedPersonInternalModel);
     }
 
     @Test

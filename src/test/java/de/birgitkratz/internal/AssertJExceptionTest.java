@@ -16,11 +16,13 @@ class AssertJExceptionTest {
     @Test
     void testExceptionUsingAssertThat() {
         personExternalModel.setDateOfBirth("300-02-1968");
+
         try {
             new PersonExternalModelToPersonInternalModelMapper().personMapper().apply(personExternalModel);
             fail("Exception should have been thrown");
         } catch (Exception e) {
-            assertThat(e).isInstanceOf(MappingException.class)
+            assertThat(e)
+                    .isInstanceOf(MappingException.class)
                     .hasMessageContaining("while mapping")
                     .hasCauseInstanceOf(DateTimeParseException.class);
         }

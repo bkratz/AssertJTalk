@@ -23,17 +23,19 @@ public class Junit4AssertionsTest {
 
         assertNotNull(personInternalModel.getCommunication());
 
+        final var communication = personInternalModel.getCommunication();
+
         // bound to order
-        assertEquals(2, personInternalModel.getCommunication().getEmails().size());
-        assertEquals("mail@birgitkratz.de", personInternalModel.getCommunication().getEmails().get(0).value());
-        assertEquals("business@birgitkratz.de", personInternalModel.getCommunication().getEmails().get(1).value());
+        assertEquals(2, communication.getEmails().size());
+        assertEquals("mail@birgitkratz.de", communication.getEmails().get(0).value());
+        assertEquals("business@birgitkratz.de", communication.getEmails().get(1).value());
 
-        assertEquals(2, personInternalModel.getCommunication().getTelefons().size());
-        assertEquals("my primary number", personInternalModel.getCommunication().getTelefons().get(0).value());
-        assertEquals("my other number", personInternalModel.getCommunication().getTelefons().get(1).value());
+        assertEquals(2, communication.getTelefons().size());
+        assertEquals("my primary number", communication.getTelefons().get(0).value());
+        assertEquals("my other number", communication.getTelefons().get(1).value());
 
-        assertEquals(1, personInternalModel.getCommunication().getMobiles().size());
-        assertEquals("my mobile number", personInternalModel.getCommunication().getMobiles().get(0).value());
+        assertEquals(1, communication.getMobiles().size());
+        assertEquals("my mobile number", communication.getMobiles().get(0).value());
     }
 
     @Test
