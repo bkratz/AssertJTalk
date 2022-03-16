@@ -24,7 +24,6 @@ class AssertJSoftAssertionsTest {
                 .hasFieldOrPropertyWithValue("name", "Birgit")
                 .returns("02-09-1968", from(PersonExternalModel::getDateOfBirth));
 
-        // not bound to any order
         softly.assertThat(personExternalModel)
                 .extracting(PersonExternalModel::getCommunications, InstanceOfAssertFactories.list(Communication.class))
                 .hasSize(4)
