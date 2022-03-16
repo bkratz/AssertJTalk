@@ -21,6 +21,7 @@ class AssertJComparisonTest {
 
         assertThat(personInternalModel)
                 .usingRecursiveComparison()
+//                .withStrictTypeChecking()
                 .isEqualTo(expectedPersonInternalModel);
     }
 

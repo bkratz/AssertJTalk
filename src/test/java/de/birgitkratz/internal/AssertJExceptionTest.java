@@ -20,8 +20,8 @@ class AssertJExceptionTest {
         try {
             new PersonExternalModelToPersonInternalModelMapper().personMapper().apply(personExternalModel);
             fail("Exception should have been thrown");
-        } catch (Exception e) {
-            assertThat(e)
+        } catch (Exception exception) {
+            assertThat(exception)
                     .isInstanceOf(MappingException.class)
                     .hasMessageContaining("while mapping")
                     .hasCauseInstanceOf(DateTimeParseException.class);
@@ -30,7 +30,7 @@ class AssertJExceptionTest {
 
     @Test
     void testExceptionUsingAssertExceptionOfType() {
-        personExternalModel.setDateOfBirth("300-02-1968");
+        personExternalModel.setDateOfBirth("090-02-1968");
         assertThatExceptionOfType(MappingException.class)
                 .isThrownBy(() -> new PersonExternalModelToPersonInternalModelMapper().personMapper().apply(personExternalModel))
                 .withMessageStartingWith("Something went wrong")
